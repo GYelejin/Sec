@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+                <h1>
+                    Знакомства для
+                    <br/>
+                    <strong>кратких </strong>людей
+                </h1>
+                <a href="{% url 'register' %}">Регистрация</a>
+            </div>
+            <div>
+                <div>
+                    <h2>Вход</h2>
+                    <form action="{% url 'landingLogin' %}" method="POST">
+                        {% csrf_token %}
+                        <div>
+                            <input
+                                   id="floatingName"
+                                   type="text"
+                                   name="username"
+                                   placeholder="name"/>
+                            <label for="floatingName">Логин</label>
+                        </div>
+                        <div>
+                            <input
+                                   id="floatingPassword"
+                                   type="password"
+                                   name="password"
+                                   placeholder="••••••••"/>
+                            <label for="floatingPassword">Пароль</label>
+                        </div>
+                        <div>
+                            <button type="submit">Войти</button>
+                        </div>
+                    </form>
+                </div>
+    </section>
+    
+</div>
+<section>
+    <div>
+        <h3>
+            Сейчас на сайте
+        </h3>
+    </div>
+    <div>
+            {% for profile in profiles %}
+                        <div>
+                            {{ profile.username }}
+                            {{ profile.about}}
+                        </div>
+            {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if page == 'register' %}
+        <section>
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <p>Добро пожаловать на сайт</p>
+                {% for field in form %}
+                    <div>
+                        <label for="{{ field.name }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                {% for error in field.errors %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endfor %}
+                <div>
+                    <button type="submit">Создать аккаунт</button>
+                </div>
+                <div>
+                    <p>Есть аккаунт? <a href="{% url 'login' %}">Войдите на сайт</a></p>
+                </div>
+            </form>
+        </section>
+    {% else %}
+    <section>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <p>Добро пожаловать на сайт</p>
+                <div>
+                    <label for="username">Логин</label>
+                    <input type="name" name="username" placeholder="username">
+                </div>
+                <div>
+                    <label for="password">Пароль</label>
+                    <input type="password" name="password" placeholder="*******">
+                </div>
+                <div>
+                    <button type="submit">Войти</button>
+                </div>
+            </div>
+            <div>
+                <p>Нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a></p>
+            </div>
+        </form>
+    </section>
+    {% endif %}
+{% endblock content %}

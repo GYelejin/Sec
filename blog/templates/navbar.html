@@ -1,0 +1,30 @@
+{% load static %}
+<nav>
+    <div>
+        <a href="{% url 'landing' %}">Друг уже тут!</a>
+        <div>
+            <ul>
+                {% if not request.user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'landing' %}">Главная</a>
+                    </li>
+                {% endif %}
+                
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'edit-account' %}">Аккаунт</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">Выйти</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">Вход / Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <div>
+            </div>
+        </div>
+    </div>
+</nav>

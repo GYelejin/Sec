@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <form method="POST" action="{% url 'edit-account' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Добро пожаловать на сайт</p>
+            {% for field in form %}
+                    <label for="{{ field.name }}">{{ field.label }}</label>
+                    {{ field }}
+            {% endfor %}
+            {% for error in field.errors %}<p style="color: red;">{{ error }}</p>{% endfor %}
+            <button type="submit">Сохранить изменения</button>
+        </form>
+    </section>
+{% endblock content %}
